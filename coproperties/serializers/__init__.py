@@ -1,0 +1,2 @@
+from .coproperties import CopropertiesSerializer
+from .property import PropertySerializer

@@ -1,0 +1,11 @@
+{
+    "dev": {
+        "aws_region": "us-east-1",
+        "django_settings": "property_manage_core.settings",
+        "profile_name": "property",
+        "project_name": "property-manage",
+        "runtime": "python3.8",
+        "s3_bucket": "zappa-fvc9lxveo",
+        "use_precompiled_packages": false
+    }
+}
