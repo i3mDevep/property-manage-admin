@@ -32,20 +32,32 @@ ALLOWED_HOSTS = ['127.0.0.1', '03mdyjmpja.execute-api.us-east-1.amazonaws.com',]
 
 # Application definition
 
-INSTALLED_APPS = [
+
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+THIRD_PARTY_APPS = [
+    'rest_framework',
+    'corsheaders',
+    'django_filters',
     'django_s3_storage',
     'django_s3_sqlite',
+]
+
+LOCAL_APPS = [
     'users',
     'bussiness',
     'coproperties',
     'payments',
 ]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,21 +94,31 @@ WSGI_APPLICATION = 'property_manage_core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django_s3_sqlite",
-#         "NAME": "sqlite.db",
-#         "BUCKET": "zappa-sqlite-property",
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django_s3_sqlite",
+        "NAME": "sqlite.db",
+        "BUCKET": "zappa-sqlite-property",
+    }
+}
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
