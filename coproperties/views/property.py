@@ -16,8 +16,8 @@ class PropertyAPIView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
-        #return Property.objects.all()
+            return Property.objects.all()
 
-            return Property.objects.filter(coproperty__user_coproperty=self.request.user)
+        return Property.objects.filter(coproperty__user_coproperty=self.request.user)
 
     serializer_class = PropertySerializer

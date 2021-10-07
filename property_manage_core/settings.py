@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = [
     'django_filters',
     'django_s3_storage',
     'django_s3_sqlite',
+    'django_restql',
 ]
 
 LOCAL_APPS = [
